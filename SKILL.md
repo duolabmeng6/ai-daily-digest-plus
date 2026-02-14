@@ -31,6 +31,63 @@ description: "Fetches RSS feeds from 90 top Hacker News blogs (curated by Karpat
 
 ---
 
+## 初始化配置
+
+### 首次使用：创建 API 配置文件
+
+Agent 在首次运行时**必须引导用户创建 `config.json`：
+
+```
+question({
+  questions: [
+    {
+      header: "API Base URL",
+      question: "请输入 OpenAI 兼容的 API Base URL：\n\n示例：\n• https://api.openai.com/v1\n• https://api.gemini-cloud.com/v1beta\n• https://your-proxy.com/v1",
+      type: "input",
+      placeholder: "https://api.openai.com/v1"
+    },
+    {
+      header: "API Key",
+      question: "请输入 API Key：",
+      type: "input"
+    },
+    {
+      header: "Model 名称",
+      question: "请输入模型名称：\n\n示例：\n• gpt-4\n• gpt-4o\n• gemini-2.0-flash-exp",
+      type: "input",
+      placeholder: "gpt-4"
+    }
+  ]
+})
+```
+
+然后创建 `config.json` 文件：
+
+```bash
+cat > config.json << 'EOF'
+{
+  "apis": [
+    {
+      "base_url": "${base_url}",
+      "api_key": "${api_key}",
+      "model": "${model}"
+    }
+  ],
+  "timeout_seconds": 120,
+  "extra_body": {},
+  "extra_headers": {}
+}
+EOF
+```
+
+输出确认：
+
+```
+✅ 配置文件已创建：config.json
+```
+
+---
+
 ## 配置持久化
 
 配置文件路径: `~/.hn-daily-digest/config.json`
