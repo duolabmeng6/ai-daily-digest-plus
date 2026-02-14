@@ -22,6 +22,43 @@ AI Daily Digest Plus 是一个智能技术文章聚合器，它会：
 
 ---
 
+## 安装
+
+### 作为 Claude Code Skill 安装
+
+1. 克隆仓库到 Claude Code 技能目录：
+
+```bash
+# 进入 Claude Code 技能目录
+cd ~/.claude/skills
+
+# 克隆仓库
+git clone https://github.com/duolabmeng6/ai-daily-digest-plus.git
+```
+
+2. 重启 Claude Code，技能会自动加载
+
+3. 在对话中输入 `/digest` 即可使用
+
+### 手动安装（无需 Claude Code）
+
+1. 克隆仓库到本地：
+
+```bash
+git clone https://github.com/duolabmeng6/ai-daily-digest-plus.git
+cd ai-daily-digest-plus
+```
+
+2. 创建 `config.json` 配置文件（参考下方配置说明）
+
+3. 运行脚本：
+
+```bash
+bun scripts/digest.ts --hours 48 --top-n 15 --lang zh
+```
+
+---
+
 ## 快速开始
 
 ### 方式一：作为 Skill 使用（推荐）
