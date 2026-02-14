@@ -1,6 +1,6 @@
 ---
 name: ai-daily-digest
-description: "Fetches RSS feeds from 90 top Hacker News blogs (curated by Karpathy), uses AI to score and filter articles, and generates a daily digest in Markdown with Chinese-translated titles, category grouping, trend highlights, and visual statistics (Mermaid charts + tag cloud). Use when user mentions 'daily digest', 'RSS digest', 'blog digest', 'AI blogs', 'tech news summary', or asks to run /digest command. Trigger command: /digest."
+description: "从 Karpathy 推荐的 90 个顶级技术博客抓取 RSS，使用 AI 评分筛选文章，生成每日摘要日报。包含中文标题、分类分组、趋势亮点、可视化统计（Mermaid 图表和标签云）。当用户提到 'daily digest'、'RSS digest'、'blog digest'、'AI blogs'、'tech news summary' 或请求运行 /digest 命令时触发。"
 ---
 
 # AI Daily Digest
@@ -90,7 +90,7 @@ EOF
 
 ## 配置持久化
 
-配置文件路径: `~/.hn-daily-digest/config.json`
+配置文件路径: `~/.ai-daily-digest/config.json`
 
 Agent 在执行前**必须检查**此文件是否存在：
 1. 如果存在，读取并解析 JSON
@@ -100,7 +100,6 @@ Agent 在执行前**必须检查**此文件是否存在：
 **配置文件结构**:
 ```json
 {
-  "geminiApiKey": "",
   "timeRange": 48,
   "topN": 15,
   "language": "zh",
@@ -115,10 +114,10 @@ Agent 在执行前**必须检查**此文件是否存在：
 ### Step 0: 检查已保存配置
 
 ```bash
-cat ~/.hn-daily-digest/config.json 2>/dev/null || echo "NO_CONFIG"
+cat ~/.ai-daily-digest/config.json 2>/dev/null || echo "NO_CONFIG"
 ```
 
-如果配置存在且有 `geminiApiKey`，询问是否复用：
+如果配置存在，询问是否复用：
 
 ```
 question({
@@ -126,7 +125,7 @@ question({
     header: "使用已保存配置",
     question: "检测到上次使用的配置：\n\n• 时间范围: ${config.timeRange}小时\n• 精选数量: ${config.topN} 篇\n• 输出语言: ${config.language === 'zh' ? '中文' : 'English'}\n\n请选择操作：",
     options: [
-      { label: "使用上次配置直接运行 (Recommended)", description: "使用所有已保存的参数立即开始" },
+      { label: "使用上次配置直接运行 (推荐)", description: "使用所有已保存的参数立即开始" },
       { label: "重新配置", description: "从头开始配置所有参数" }
     ]
   }]
@@ -145,7 +144,7 @@ question({
       question: "抓取多长时间内的文章？",
       options: [
         { label: "24 小时", description: "仅最近一天" },
-        { label: "48 小时 (Recommended)", description: "最近两天，覆盖更全" },
+        { label: "48 小时 (推荐)", description: "最近两天，覆盖更全" },
         { label: "72 小时", description: "最近三天" },
         { label: "7 天", description: "一周内的文章" }
       ]
@@ -155,7 +154,7 @@ question({
       question: "AI 筛选后保留多少篇？",
       options: [
         { label: "10 篇", description: "精简版" },
-        { label: "15 篇 (Recommended)", description: "标准推荐" },
+        { label: "15 篇 (推荐)", description: "标准推荐" },
         { label: "20 篇", description: "扩展版" }
       ]
     },
@@ -163,25 +162,11 @@ question({
       header: "输出语言",
       question: "摘要使用什么语言？",
       options: [
-        { label: "中文 (Recommended)", description: "摘要翻译为中文" },
+        { label: "中文 (推荐)", description: "摘要翻译为中文" },
         { label: "English", description: "保持英文原文" }
       ]
     }
   ]
-})
-```
-
-### Step 1b: Gemini API Key
-
-如果配置中没有已保存的 API Key，询问：
-
-```
-question({
-  questions: [{
-    header: "Gemini API Key",
-    question: "请输入 Gemini API Key（获取地址: https://aistudio.google.com/apikey）：",
-    type: "input"
-  }]
 })
 ```
 
@@ -197,22 +182,7 @@ npx -y bun ${SKILL_DIR}/scripts/digest.ts \
   --output ./output/digest-$(date +%Y%m%d).md
 ```
 
-**注意**：需要在项目根目录创建 `config.json` 配置文件，配置 OpenAI 兼容的 API：
-
-```json
-{
-  "apis": [
-    {
-      "base_url": "https://api.example.com/v1",
-      "api_key": "your-api-key",
-      "model": "gpt-4"
-    }
-  ],
-  "timeout_seconds": 120,
-  "extra_body": {},
-  "extra_headers": {}
-}
-```
+**注意**：`config.json` 配置文件应在初始化步骤中已创建。
 
 支持配置多个 API 端点，系统会自动进行故障转移。
 
@@ -265,7 +235,7 @@ npx -y bun ${SKILL_DIR}/scripts/digest.ts \
 
 包括：simonwillison.net, paulgraham.com, overreacted.io, gwern.net, krebsonsecurity.com, antirez.com, daringfireball.net 等顶级技术博客。
 
-完整列表内嵌于脚本中。
+完整列表见 `config/rss-feeds.json`。
 
 ---
 
