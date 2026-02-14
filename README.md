@@ -55,14 +55,10 @@ Claude Code 会自动克隆并加载技能，安装完成后输入 `/digest` 即
 ### 方式二：命令行运行
 
 ```bash
-bun run scripts/digest.ts --hours 48 --top-n 15 --lang zh --output ./digest.md
+bun run scripts/digest.ts --hours 48 --top-n 15 --lang zh --output ./data/digest.md
 ```
 
-或使用 npx 自动安装 Bun：
-
-```bash
-npx -y bun scripts/digest.ts --hours 48 --top-n 15 --lang zh --output ./digest.md
-```
+生成的日报会保存到 `data/` 目录下（格式：`digest-YYYYMMDD.md`）
 
 ---
 
