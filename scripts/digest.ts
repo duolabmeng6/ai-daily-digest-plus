@@ -2,6 +2,7 @@ import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
+import { existsSync } from 'node:fs';
 
 import { ScoredArticle, CategoryId } from './types';
 import { loadConfig } from './gemini-client';
@@ -49,6 +50,52 @@ ${colors.cyan}Examples:${colors.reset}
   process.exit(0);
 }
 
+/**
+ * 检查配置文件是否存在，提供友好提示
+ */
+async function checkConfigFile(): Promise<void> {
+  const projectRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
+  const configPath = join(projectRoot, 'config.json');
+  const configExamplePath = join(projectRoot, 'config.example.json');
+
+  if (!existsSync(configPath)) {
+    console.log('');
+    console.log(`${colors.yellow}⚠️  未找到配置文件 config.json${colors.reset}`);
+    console.log('');
+    console.log(`${colors.cyan}📝 请创建配置文件：${colors.reset}`);
+    console.log('');
+    console.log(`在项目根目录创建 ${colors.bright}config.json${colors.reset}：`);
+    console.log('```json');
+    console.log('{');
+    console.log('  "apis": [');
+    console.log('    {');
+    console.log('      "base_url": "https://api.openai.com/v1",');
+    console.log('      "api_key": "你的 API key",');
+    console.log('      "model": "gpt-4"');
+    console.log('    }');
+    console.log('  ]');
+    console.log('}');
+    console.log('```');
+    console.log('');
+    console.log(`${colors.cyan}🔑 支持的平台：${colors.reset}`);
+    console.log('  - OpenAI: https://platform.openai.com');
+    console.log('  - Grok: https://x.ai');
+    console.log('  - 其他 OpenAI 兼容 API');
+    console.log('');
+    console.log(`${colors.dim}提示: 配置文件已加入 .gitignore，不会被提交到仓库${colors.reset}`);
+    console.log('');
+
+    // 检查是否有示例文件
+    if (existsSync(configExamplePath)) {
+      console.log(`${colors.cyan}💡 发现配置示例文件，可以复制：${colors.reset}`);
+      console.log(`  cp config.example.json config.json`);
+      console.log('');
+    }
+
+    process.exit(1);
+  }
+}
+
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   if (args.includes('--help') || args.includes('-h')) printUsage();
@@ -79,6 +126,9 @@ async function main(): Promise<void> {
   }
 
   // 加载配置
+  // 先检查配置文件是否存在
+  await checkConfigFile();
+
   try {
     await loadConfig();
   } catch (error) {
@@ -230,6 +280,51 @@ async function main(): Promise<void> {
 
   console.log('');
   console.log(`[digest] ✅ Done!`);
+
+  // 生成运行报告
+  const failedSources = RSS_FEEDS.filter(feed => !successfulSources.has(feed.name));
+  const defaultScoredCount = finalArticles.filter(a =>
+    a.scoreBreakdown.relevance === 5 &&
+    a.scoreBreakdown.quality === 5 &&
+    a.scoreBreakdown.timeliness === 5
+  ).length;
+
+  console.log('');
+  console.log(`${colors.cyan}=== 运行报告 ===${colors.reset}`);
+  console.log(`✅ 成功抓取: ${successfulSources.size}/${RSS_FEEDS.length} 个源`);
+  console.log(`📰 获取文章: ${allArticles.length} 篇`);
+  console.log(`⏰ 时间过滤: ${recentArticles.length} 篇（${hours} 小时内）`);
+  console.log(`🤖 AI 评分: ${scoredArticles.length} 篇`);
+  console.log(`📊 精选文章: ${finalArticles.length} 篇`);
+
+  if (failedSources.length > 0) {
+    console.log('');
+    console.log(`${colors.yellow}⚠️  失败源 (${failedSources.length}):${colors.reset}`);
+    failedSources.slice(0, 5).forEach(s => console.log(`  - ${s.name}`));
+    if (failedSources.length > 5) {
+      console.log(`  ... 还有 ${failedSources.length - 5} 个`);
+    }
+  }
+
+  if (defaultScoredCount > 0) {
+    console.log('');
+    console.log(`${colors.yellow}⚠️  降级评分: ${defaultScoredCount} 篇（API 失败，使用默认分 5/5/5）${colors.reset}`);
+  }
+
+  console.log('');
+  console.log(`📁 报告: ${outputPath}`);
+  console.log(`💾 缓存: ${useCache ? '使用缓存' : '重新抓取'}`);
+
+  if (failedSources.length > 3) {
+    console.log('');
+    console.log(`${colors.yellow}⚠️  警告: 多个源失败，可能影响文章覆盖率${colors.reset}`);
+  }
+  if (defaultScoredCount > 5) {
+    console.log('');
+    console.log(`${colors.yellow}⚠️  警告: 多数文章使用默认评分，建议检查 API 配置${colors.reset}`);
+  }
+
+  console.log('');
   console.log(`[digest] 📁 Report: ${outputPath}`);
   console.log(`[digest] 📊 Stats: ${successfulSources.size} sources → ${allArticles.length} articles → ${recentArticles.length} recent → ${finalArticles.length} selected`);
 

@@ -1,0 +1,13 @@
+{
+  "apis": [
+    {
+      "base_url": "https://api.openai.com/v1",
+      "api_key": "你的 API key",
+      "model": "gpt-4"
+    }
+  ],
+  "timeout_seconds": 120,
+  "extra_body": {},
+  "extra_headers": {},
+  "_comment": "复制此文件为 config.json 并填入你的 API 配置。支持 OpenAI、Grok 等兼容接口。"
+}
