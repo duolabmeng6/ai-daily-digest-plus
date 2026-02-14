@@ -16,6 +16,14 @@ export function setTestMode(value: boolean) {
   TEST_MODE = value;
 }
 
+export function isDebugMode(): boolean {
+  return DEBUG_MODE;
+}
+
+export function isTestMode(): boolean {
+  return TEST_MODE;
+}
+
 export function log(level: 'info' | 'success' | 'warn' | 'error' | 'debug', ...args: unknown[]) {
   const timestamp = new Date().toISOString().substr(11, 12);
   const prefix = {

@@ -10,6 +10,7 @@ import { scoreArticlesWithAI } from './ai-scorer';
 import { summarizeArticles, generateHighlights } from './ai-summarizer';
 import { generateDigestReport } from './reporter';
 import { setDebugMode, setTestMode, log, colors } from './logger';
+import { readCache, writeCache, clearCache } from './feed-cache';
 
 // ============================================================================
 // CLI
@@ -26,6 +27,8 @@ ${colors.cyan}Options:${colors.reset}
   --top-n <n>     Number of top articles to include (default: 15)
   --lang <lang>   Summary language: zh or en (default: zh)
   --output <path> Output file path (default: ./digest-YYYYMMDD.md)
+  --no-cache      Disable cache and force re-fetch
+  --clear-cache   Clear all cached data
   --test          Test mode: only fetch 1 feed for debugging
   --debug         Debug mode: show detailed logs
   --help          Show this help
@@ -56,6 +59,8 @@ async function main(): Promise<void> {
   let outputPath = '';
   const debugMode = args.includes('--debug');
   const testMode = args.includes('--test');
+  const noCache = args.includes('--no-cache');
+  const clearCache = args.includes('--clear-cache');
 
   setDebugMode(debugMode);
   setTestMode(testMode);
@@ -115,8 +120,35 @@ async function main(): Promise<void> {
     console.log(`[digest] ⚠️  测试模式: 仅抓取 ${feedsToFetch[0]!.name}`);
   }
 
+  // 清除缓存
+  if (clearCache) {
+    await clearCache();
+  }
+
   console.log(`[digest] Step 1/5: Fetching ${feedsToFetch.length} RSS feeds...`);
-  const allArticles = await fetchAllFeeds(feedsToFetch);
+
+  let allArticles: Awaited<ReturnType<typeof fetchAllFeeds>>;
+  let useCache = false;
+
+  // 尝试从缓存读取（非测试模式且未禁用缓存）
+  if (!testMode && !noCache) {
+    const cachedArticles = await readCache();
+    if (cachedArticles && cachedArticles.length > 0) {
+      allArticles = cachedArticles;
+      useCache = true;
+    }
+  }
+
+  // 缓存未命中或被禁用，进行实际抓取
+  if (!useCache) {
+    console.log(`[digest] ${noCache ? '(强制抓取模式)' : '(缓存未命中)'}`);
+    allArticles = await fetchAllFeeds(feedsToFetch);
+
+    // 写入缓存（仅非测试模式）
+    if (!testMode && allArticles.length > 0) {
+      await writeCache(allArticles, feedsToFetch.length);
+    }
+  }
 
   if (allArticles.length === 0) {
     console.error('[digest] Error: No articles fetched from any feed. Check network connection.');

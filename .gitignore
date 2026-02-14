@@ -4,6 +4,9 @@ config.json
 # 生成的日报文件（放在 data/ 目录）
 data/*.md
 
+# RSS 缓存
+data/cache/
+
 # 测试文件
 test-*.md
 *.test.md

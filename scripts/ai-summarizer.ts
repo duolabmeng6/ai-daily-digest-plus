@@ -5,6 +5,7 @@
 import { Article, ScoredArticle, GeminiSummaryResult } from './types';
 import { GEMINI_BATCH_SIZE, MAX_CONCURRENT_GEMINI } from './config';
 import { callGemini, parseJsonResponse } from './gemini-client';
+import { isDebugMode } from './logger';
 
 function buildSummaryPrompt(
   articles: Array<{ index: number; title: string; description: string; sourceName: string; link: string }>,
@@ -79,6 +80,16 @@ export async function summarizeArticles(
     const promises = batchGroup.map(async (batch) => {
       try {
         const prompt = buildSummaryPrompt(batch, lang);
+
+        // Debug 模式下打印完整 prompt
+        if (isDebugMode()) {
+          console.log('\n' + '='.repeat(80));
+          console.log(`[DEBUG] 发送给 AI 摘要的 Prompt (batch ${i / MAX_CONCURRENT_GEMINI + Math.floor(batchGroup.indexOf(batch) / MAX_CONCURRENT_GEMINI) + 1}):`);
+          console.log('='.repeat(80));
+          console.log(prompt);
+          console.log('='.repeat(80) + '\n');
+        }
+
         const responseText = await callGemini(prompt);
         const parsed = parseJsonResponse<GeminiSummaryResult>(responseText);
 
@@ -127,6 +138,14 @@ ${langNote}
 ${articleList}
 
 直接返回纯文本总结，不要 JSON，不要 markdown 格式。`;
+
+  if (isDebugMode()) {
+    console.log('\n' + '='.repeat(80));
+    console.log('[DEBUG] 发送给 AI 生成亮点的 Prompt:');
+    console.log('='.repeat(80));
+    console.log(prompt);
+    console.log('='.repeat(80) + '\n');
+  }
 
   try {
     const text = await callGemini(prompt);

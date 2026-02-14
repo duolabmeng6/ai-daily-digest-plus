@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" width="1400" height="950">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="dataGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="processGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="cacheGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="outputGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 箭头标记 -->
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f97316"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#a855f7"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowSky" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0ea5e9"/>
+    </marker>
+  </defs>
+
+  <style>
+    /* 流动线段动画 */
+    .flow-line-green {
+      stroke-dasharray: 8, 4;
+      animation: dash-flow-green 0.5s linear infinite;
+    }
+    @keyframes dash-flow-green {
+      to { stroke-dashoffset: -12; }
+    }
+
+    .flow-line-orange {
+      stroke-dasharray: 8, 4;
+      animation: dash-flow-orange 0.5s linear infinite;
+    }
+    @keyframes dash-flow-orange {
+      to { stroke-dashoffset: -12; }
+    }
+
+    .flow-line-purple {
+      stroke-dasharray: 8, 4;
+      animation: dash-flow-purple 0.5s linear infinite;
+    }
+    @keyframes dash-flow-purple {
+      to { stroke-dashoffset: -12; }
+    }
+
+    .flow-line-blue {
+      stroke-dasharray: 8, 4;
+      animation: dash-flow-blue 0.5s linear infinite;
+    }
+    @keyframes dash-flow-blue {
+      to { stroke-dashoffset: -12; }
+    }
+
+    .flow-line-sky {
+      stroke-dasharray: 8, 4;
+      animation: dash-flow-sky 0.5s linear infinite;
+    }
+    @keyframes dash-flow-sky {
+      to { stroke-dashoffset: -12; }
+    }
+  </style>
+
+  <!-- 白色背景 -->
+  <rect width="1400" height="950" fill="#ffffff"/>
+
+  <!-- 标题区 -->
+  <g transform="translate(50, 40)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e293b">AI Daily Digest - 系统架构图</text>
+    <text x="0" y="30" font-family="Arial, sans-serif" font-size="14" fill="#64748b">AI-Powered Tech Blog Aggregator &amp; Summarizer</text>
+    <text x="1200" y="0" text-anchor="end" font-family="monospace" font-size="12" fill="#94a3b8">Bun Runtime | TypeScript | Zero Dependencies</text>
+    <text x="1200" y="20" text-anchor="end" font-family="monospace" font-size="12" fill="#94a3b8">90 RSS Sources | Grok API | Bilingual</text>
+  </g>
+
+  <!-- 网格背景 -->
+  <g opacity="0.08">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#94a3b8" stroke-width="0.5"/>
+    </pattern>
+    <rect width="1400" height="950" fill="url(#grid)"/>
+  </g>
+
+  <!-- 数据源模块 -->
+  <g transform="translate(50, 100)">
+    <rect x="0" y="0" width="200" height="120" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="12" fill="url(#dataGradient)"/>
+    <text x="100" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">📡 数据源</text>
+
+    <g transform="translate(15, 45)">
+      <text x="0" y="12" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#16a34a">90 个顶级技术博客</text>
+      <text x="0" y="30" font-family="monospace" font-size="9" fill="#64748b">Hacker News 推荐</text>
+      <text x="0" y="45" font-family="monospace" font-size="9" fill="#64748b">Karpathy 精选列表</text>
+      <text x="0" y="60" font-family="monospace" font-size="9" fill="#64748b">config/rss-feeds.json</text>
+    </g>
+  </g>
+
+  <!-- RSS 抓取模块 -->
+  <g transform="translate(320, 100)">
+    <rect x="0" y="0" width="200" height="120" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="12" fill="url(#processGradient)"/>
+    <text x="100" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">⚙️ RSS 抓取器</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="85" height="55" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+      <text x="42" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#ea580c">feed-fetcher.ts</text>
+      <text x="42" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#64748b">并发抓取 10 路</text>
+      <text x="42" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#64748b">15s 超时</text>
+
+      <rect x="95" y="0" width="85" height="55" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1"/>
+      <text x="42" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#ea580c">rss-parser.ts</text>
+      <text x="42" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#64748b">RSS 2.0</text>
+      <text x="42" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#64748b">Atom 格式</text>
+    </g>
+  </g>
+
+  <!-- 缓存模块 -->
+  <g transform="translate(590, 100)">
+    <rect x="0" y="0" width="200" height="120" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="12" fill="url(#cacheGradient)"/>
+    <text x="100" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">💾 缓存系统</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="170" height="55" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="85" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#2563eb">feed-cache.ts</text>
+      <text x="85" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">读写缓存 | 时间戳校验</text>
+      <text x="85" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">data/cache/*.json</text>
+    </g>
+  </g>
+
+  <!-- 时间过滤模块 -->
+  <g transform="translate(860, 100)">
+    <rect x="0" y="0" width="200" height="120" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="12" fill="url(#processGradient)"/>
+    <text x="100" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">🔍 时间过滤器</text>
+
+    <g transform="translate(15, 45)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ea580c">按时间窗口筛选</text>
+      <text x="0" y="35" font-family="monospace" font-size="9" fill="#64748b">--hours 24/48/72</text>
+      <text x="0" y="50" font-family="monospace" font-size="9" fill="#64748b">过滤近期文章</text>
+    </g>
+  </g>
+
+  <!-- AI 评分模块 -->
+  <g transform="translate(50, 280)">
+    <rect x="0" y="0" width="350" height="150" rx="12" fill="#faf5ff" stroke="#a855f7" stroke-width="2"/>
+    <rect x="0" y="0" width="350" height="35" rx="12" fill="url(#aiGradient)"/>
+    <text x="175" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">🤖 AI 评分器</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="160" height="85" rx="6" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
+      <text x="80" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#7c3aed">ai-scorer.ts</text>
+      <text x="80" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">三维评分 (1-10):</text>
+      <text x="10" y="52" font-family="Arial" font-size="8" fill="#94a3b8">• 相关性 relevance</text>
+      <text x="10" y="65" font-family="Arial" font-size="8" fill="#94a3b8">• 质量 quality</text>
+      <text x="10" y="78" font-family="Arial" font-size="8" fill="#94a3b8">• 时效性 timeliness</text>
+
+      <rect x="170" y="0" width="160" height="85" rx="6" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
+      <text x="80" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#7c3aed">grok-client.ts</text>
+      <text x="80" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Grok API 客户端</text>
+      <text x="80" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#94a3b8">多端点故障转移</text>
+      <text x="80" y="65" text-anchor="middle" font-family="Arial" font-size="8" fill="#94a3b8">批量评分优化</text>
+      <text x="80" y="78" text-anchor="middle" font-family="Arial" font-size="8" fill="#94a3b8">分类 + 关键词提取</text>
+    </g>
+  </g>
+
+  <!-- AI 摘要模块 -->
+  <g transform="translate(450, 280)">
+    <rect x="0" y="0" width="350" height="150" rx="12" fill="#faf5ff" stroke="#a855f7" stroke-width="2"/>
+    <rect x="0" y="0" width="350" height="35" rx="12" fill="url(#aiGradient)"/>
+    <text x="175" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">📝 AI 摘要器</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="160" height="85" rx="6" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
+      <text x="80" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#7c3aed">ai-summarizer.ts</text>
+      <text x="80" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">结构化摘要生成:</text>
+      <text x="10" y="52" font-family="Arial" font-size="8" fill="#94a3b8">• 中文标题翻译</text>
+      <text x="10" y="65" font-family="Arial" font-size="8" fill="#94a3b8">• 4-6 句摘要总结</text>
+      <text x="10" y="78" font-family="Arial" font-size="8" fill="#94a3b8">• 推荐理由生成</text>
+
+      <rect x="170" y="0" width="160" height="85" rx="6" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
+      <text x="80" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#7c3aed">highlights.ts</text>
+      <text x="80" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">趋势洞察生成:</text>
+      <text x="10" y="52" font-family="Arial" font-size="8" fill="#94a3b8">• 归纳宏观趋势</text>
+      <text x="10" y="65" font-family="Arial" font-size="8" fill="#94a3b8">• 技术圈洞察</text>
+      <text x="10" y="78" font-family="Arial" font-size="8" fill="#94a3b8">• 2-3 个核心主题</text>
+    </g>
+  </g>
+
+  <!-- 排序筛选模块 -->
+  <g transform="translate(860, 280)">
+    <rect x="0" y="0" width="200" height="150" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <rect x="0" y="0" width="200" height="35" rx="12" fill="url(#processGradient)"/>
+    <text x="100" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">📊 排序筛选</text>
+
+    <g transform="translate(15, 45)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ea580c">按总分降序排列</text>
+      <text x="0" y="35" font-family="monospace" font-size="9" fill="#64748b">topN 筛选 (--top-n)</text>
+      <text x="0" y="50" font-family="monospace" font-size="9" fill="#64748b">默认: 15 篇文章</text>
+      <text x="0" y="70" font-family="Arial, sans-serif" font-size="9" fill="#94a3b8">六大分类自动分组</text>
+    </g>
+  </g>
+
+  <!-- 报告生成模块 -->
+  <g transform="translate(50, 480)">
+    <rect x="0" y="0" width="300" height="140" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+    <rect x="0" y="0" width="300" height="35" rx="12" fill="url(#dataGradient)"/>
+    <text x="150" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">📋 报告生成器</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="270" height="75" rx="6" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+      <text x="135" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#16a34a">reporter.ts</text>
+      <text x="135" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Markdown 报告生成:</text>
+      <text x="10" y="52" font-family="Arial" font-size="8" fill="#94a3b8">• 今日看点 | Top 3 深度展示 | 数据概览</text>
+      <text x="10" y="65" font-family="Arial" font-size="8" fill="#94a3b8">• 分类文章 | Mermaid 图表 | 标签云</text>
+    </g>
+  </g>
+
+  <!-- 主控制模块 -->
+  <g transform="translate(400, 480)">
+    <rect x="0" y="0" width="300" height="140" rx="12" fill="#f1f5f9" stroke="#0ea5e9" stroke-width="2"/>
+    <rect x="0" y="0" width="300" height="35" rx="12" fill="url(#outputGradient)"/>
+    <text x="150" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">🎛️ 主控制器</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="130" height="75" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1"/>
+      <text x="65" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#0284c7">digest.ts</text>
+      <text x="65" y="38" text-anchor="middle" font-family="Arial" font-size="8" fill="#64748b">CLI 入口</text>
+      <text x="65" y="53" text-anchor="middle" font-family="Arial" font-size="8" fill="#64748b">参数解析</text>
+      <text x="65" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#64748b">流程编排</text>
+
+      <rect x="140" y="0" width="130" height="75" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1"/>
+      <text x="65" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#0284c7">utils/logger</text>
+      <text x="65" y="38" text-anchor="middle" font-family="Arial" font-size="8" fill="#64748b">logger.ts</text>
+      <text x="65" y="53" text-anchor="middle" font-family="Arial" font-size="8" fill="#64748b">utils.ts</text>
+      <text x="65" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#64748b">types.ts</text>
+    </g>
+  </g>
+
+  <!-- 输出模块 -->
+  <g transform="translate(750, 480)">
+    <rect x="0" y="0" width="310" height="140" rx="12" fill="#f1f5f9" stroke="#0ea5e9" stroke-width="2"/>
+    <rect x="0" y="0" width="310" height="35" rx="12" fill="url(#outputGradient)"/>
+    <text x="155" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">📄 输出文件</text>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="280" height="75" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1"/>
+      <text x="140" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#0284c7">data/digest-YYYYMMDD.md</text>
+      <text x="140" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#64748b">完整 Markdown 日报</text>
+      <text x="140" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#94a3b8">中英双语 | 可视化图表 | 结构化摘要</text>
+      <text x="140" y="72" text-anchor="middle" font-family="Arial" font-size="8" fill="#94a3b8">六大分类: AI/ML | 安全 | 工程 | 工具 | 观点 | 其他</text>
+    </g>
+  </g>
+
+  <!-- 连接线：数据源 → RSS 抓取 -->
+  <g>
+    <path d="M250 160 L320 160" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M250 160 L310 160" class="flow-line-green" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowGreen)" stroke-linecap="round"/>
+    <text x="285" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#22c55e">90 feeds</text>
+  </g>
+
+  <!-- 连接线：RSS 抓取 → 缓存 -->
+  <g>
+    <path d="M520 160 L590 160" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M520 160 L580 160" class="flow-line-green" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowGreen)" stroke-linecap="round"/>
+    <text x="555" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#22c55e">write</text>
+  </g>
+
+  <!-- 连接线：缓存 → 时间过滤 -->
+  <g>
+    <path d="M790 160 L860 160" stroke="#dcfce7" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M790 160 L850 160" class="flow-line-green" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowGreen)" stroke-linecap="round"/>
+    <text x="825" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#22c55e">read</text>
+  </g>
+
+  <!-- 连接线：时间过滤 → AI 评分 -->
+  <g>
+    <path d="M960 220 L960 250 L225 250 L225 280" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M960 220 L960 245 L225 245 L225 270" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
+    <text x="500" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#f97316">filtered articles</text>
+  </g>
+
+  <!-- 连接线：AI 评分 → 排序筛选 -->
+  <g>
+    <path d="M400 355 L450 355 L450 400 L860 400 L860 355" stroke="#fed7aa" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M400 355 L855 355" class="flow-line-orange" stroke="#f97316" stroke-width="3" fill="none" marker-end="url(#arrowOrange)" stroke-linecap="round"/>
+    <text x="625" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#f97316">scored articles</text>
+  </g>
+
+  <!-- 连接线：排序筛选 → AI 摘要 -->
+  <g>
+    <path d="M960 430 L960 460 L625 460 L625 430" stroke="#e9d5ff" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M960 430 L960 455 L630 455 L630 430" class="flow-line-purple" stroke="#a855f7" stroke-width="3" fill="none" marker-end="url(#arrowPurple)" stroke-linecap="round"/>
+    <text x="790" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a855f7">top N articles</text>
+  </g>
+
+  <!-- 连接线：AI 摘要 → 报告生成 -->
+  <g>
+    <path d="M450 430 L450 460 L200 460 L200 480" stroke="#e9d5ff" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M450 430 L450 455 L205 455 L205 470" class="flow-line-purple" stroke="#a855f7" stroke-width="3" fill="none" marker-end="url(#arrowPurple)" stroke-linecap="round"/>
+    <text x="300" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a855f7">summarized</text>
+  </g>
+
+  <!-- 连接线：报告生成 → 主控制 -->
+  <g>
+    <path d="M350 550 L400 550" stroke="#bae6fd" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M350 550 L390 550" class="flow-line-sky" stroke="#0ea5e9" stroke-width="3" fill="none" marker-end="url(#arrowSky)" stroke-linecap="round"/>
+    <text x="375" y="540" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#0ea5e9">report</text>
+  </g>
+
+  <!-- 连接线：主控制 → 输出 -->
+  <g>
+    <path d="M700 550 L750 550" stroke="#bae6fd" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M700 550 L740 550" class="flow-line-sky" stroke="#0ea5e9" stroke-width="3" fill="none" marker-end="url(#arrowSky)" stroke-linecap="round"/>
+    <text x="725" y="540" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#0ea5e9">write</text>
+  </g>
+
+  <!-- 流程说明区域 -->
+  <g transform="translate(50, 680)">
+    <rect x="0" y="0" width="650" height="220" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="325" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#1e293b">📋 数据处理流程说明</text>
+
+    <g transform="translate(20, 45)">
+      <circle cx="8" cy="8" r="6" fill="#22c55e"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 1:</tspan> 从 90 个顶级技术博客 RSS 源并发抓取最新文章（10 路并发，15s 超时）</text>
+    </g>
+
+    <g transform="translate(20, 70)">
+      <circle cx="8" cy="8" r="6" fill="#3b82f6"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 2:</tspan> 缓存系统自动读写数据，避免重复抓取（支持 --no-cache 强制刷新）</text>
+    </g>
+
+    <g transform="translate(20, 95)">
+      <circle cx="8" cy="8" r="6" fill="#f97316"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 3:</tspan> 按时间窗口筛选文章（--hours 参数，默认 48 小时）</text>
+    </g>
+
+    <g transform="translate(20, 120)">
+      <circle cx="8" cy="8" r="6" fill="#a855f7"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 4:</tspan> Grok AI 多维评分（相关性、质量、时效性）+ 自动分类 + 关键词提取</text>
+    </g>
+
+    <g transform="translate(20, 145)">
+      <circle cx="8" cy="8" r="6" fill="#f97316"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 5:</tspan> 按总分排序，筛选 Top N 文章（--top-n 参数，默认 15 篇）</text>
+    </g>
+
+    <g transform="translate(20, 170)">
+      <circle cx="8" cy="8" r="6" fill="#a855f7"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 6:</tspan> AI 生成结构化摘要（中文标题、4-6 句总结、推荐理由）+ 趋势洞察</text>
+    </g>
+
+    <g transform="translate(20, 195)">
+      <circle cx="8" cy="8" r="6" fill="#0ea5e9"/>
+      <text x="25" y="12" font-family="Arial" font-size="11" fill="#1e293b"><tspan font-weight="bold">步骤 7:</tspan> 生成 Markdown 日报文件（data/digest-YYYYMMDD.md），包含可视化图表和六大分类</text>
+    </g>
+  </g>
+
+  <!-- 图例 -->
+  <g transform="translate(750, 680)">
+    <rect x="0" y="0" width="600" height="220" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="300" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#64748b">模块类型图例</text>
+
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="30" height="20" rx="3" fill="#22c55e"/>
+      <text x="40" y="15" font-family="Arial" font-size="11" fill="#1e293b">数据源 / 采集模块</text>
+    </g>
+
+    <g transform="translate(20, 75)">
+      <rect x="0" y="0" width="30" height="20" rx="3" fill="#f97316"/>
+      <text x="40" y="15" font-family="Arial" font-size="11" fill="#1e293b">处理 / 过滤模块</text>
+    </g>
+
+    <g transform="translate(20, 105)">
+      <rect x="0" y="0" width="30" height="20" rx="3" fill="#3b82f6"/>
+      <text x="40" y="15" font-family="Arial" font-size="11" fill="#1e293b">缓存 / 存储模块</text>
+    </g>
+
+    <g transform="translate(20, 135)">
+      <rect x="0" y="0" width="30" height="20" rx="3" fill="#a855f7"/>
+      <text x="40" y="15" font-family="Arial" font-size="11" fill="#1e293b">AI 分析模块</text>
+    </g>
+
+    <g transform="translate(20, 165)">
+      <rect x="0" y="0" width="30" height="20" rx="3" fill="#0ea5e9"/>
+      <text x="40" y="15" font-family="Arial" font-size="11" fill="#1e293b">控制 / 输出模块</text>
+    </g>
+
+    <g transform="translate(320, 45)">
+      <path d="M0 10 L30 10" class="flow-line-green" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowGreen)" stroke-linecap="round"/>
+      <text x="40" y="15" font-family="Arial" font-size="11" fill="#1e293b">数据流向（带流动动画）</text>
+    </g>
+
+    <g transform="translate(320, 85)">
+      <text x="0" y="15" font-family="monospace" font-size="10" fill="#64748b">技术栈: Bun | TypeScript | 零依赖</text>
+    </g>
+
+    <g transform="translate(320, 110)">
+      <text x="0" y="15" font-family="monospace" font-size="10" fill="#64748b">API: Grok 4.1 Fast (OpenAI 兼容)</text>
+    </g>
+
+    <g transform="translate(320, 135)">
+      <text x="0" y="15" font-family="monospace" font-size="10" fill="#64748b">RSS 格式: RSS 2.0 | Atom</text>
+    </g>
+
+    <g transform="translate(320, 160)">
+      <text x="0" y="15" font-family="monospace" font-size="10" fill="#64748b">输出格式: Markdown + Mermaid 图表</text>
+    </g>
+
+    <g transform="translate(320, 185)">
+      <text x="0" y="15" font-family="monospace" font-size="10" fill="#64748b">分类体系: AI/ML | 安全 | 工程 | 工具 | 观点 | 其他</text>
+    </g>
+  </g>
+
+  <!-- 底部信息 -->
+  <g transform="translate(50, 920)">
+    <text x="0" y="0" font-family="Arial" font-size="10" fill="#94a3b8">Generated for AI Daily Digest Project</text>
+    <text x="1300" y="0" text-anchor="end" font-family="monospace" font-size="10" fill="#94a3b8">Architecture v1.0 | 2026-02-15</text>
+  </g>
+</svg>

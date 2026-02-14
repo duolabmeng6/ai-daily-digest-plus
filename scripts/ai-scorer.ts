@@ -5,6 +5,7 @@
 import { Article, CategoryId, GeminiScoringResult } from './types';
 import { GEMINI_BATCH_SIZE, MAX_CONCURRENT_GEMINI } from './config';
 import { callGemini, parseJsonResponse } from './gemini-client';
+import { isDebugMode, log } from './logger';
 
 function buildScoringPrompt(articles: Array<{ index: number; title: string; description: string; sourceName: string }>): string {
   const articlesList = articles.map(a =>
@@ -92,6 +93,16 @@ export async function scoreArticlesWithAI(
     const promises = batchGroup.map(async (batch) => {
       try {
         const prompt = buildScoringPrompt(batch);
+
+        // Debug 模式下打印完整 prompt
+        if (isDebugMode()) {
+          console.log('\n' + '='.repeat(80));
+          console.log(`[DEBUG] 发送给 AI 评分的 Prompt (batch ${i / MAX_CONCURRENT_GEMINI + Math.floor(batchGroup.indexOf(batch) / MAX_CONCURRENT_GEMINI) + 1}):`);
+          console.log('='.repeat(80));
+          console.log(prompt);
+          console.log('='.repeat(80) + '\n');
+        }
+
         const responseText = await callGemini(prompt);
         const parsed = parseJsonResponse<GeminiScoringResult>(responseText);
 
