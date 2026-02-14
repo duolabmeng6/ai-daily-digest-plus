@@ -1,6 +1,6 @@
 ---
 name: ai-daily-digest
-description: "从 Karpathy 推荐的 90 个顶级技术博客抓取 RSS，使用 AI 评分筛选文章，生成每日摘要日报。包含中文标题、分类分组、趋势亮点、可视化统计（Mermaid 图表和标签云）。当用户提到 'daily digest'、'RSS digest'、'blog digest'、'AI blogs'、'tech news summary' 或请求运行 /digest 命令时触发。"
+description: "从 Karpathy 推荐的 90 个顶级技术博客抓取 RSS，使用 AI 评分筛选文章，生成每日摘要日报。包含中文标题、分类分组、趋势亮点、可视化统计（Mermaid 图表和标签云）。当用户提到 'daily digest'、'RSS digest'、'blog digest'、'AI blogs'、'tech news summary' 或请求运行 /科技日报 命令时触发。"
 ---
 
 # AI Daily Digest
@@ -9,11 +9,11 @@ description: "从 Karpathy 推荐的 90 个顶级技术博客抓取 RSS，使用
 
 ## 命令
 
-### `/digest`
+### `/科技日报`
 
 运行每日摘要生成器。
 
-**使用方式**: 输入 `/digest`，Agent 通过交互式引导收集参数后执行。
+**使用方式**: 输入 `/科技日报`，Agent 通过交互式引导收集参数后执行。
 
 ---
 
@@ -28,6 +28,8 @@ description: "从 Karpathy 推荐的 90 个顶级技术博客抓取 RSS，使用
 | 脚本 | 用途 |
 |------|------|
 | `scripts/digest.ts` | 主脚本 - RSS 抓取、AI 评分、生成摘要 |
+
+**触发命令**: `/科技日报`
 
 ---
 

@@ -41,7 +41,7 @@ Claude Code 会自动克隆并加载技能，安装完成后输入 `/digest` 即
 在 Claude Code 对话中输入：
 
 ```
-/digest
+/科技日报
 ```
 
 然后按提示选择参数：
