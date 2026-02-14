@@ -1,0 +1,39 @@
+# 敏感配置
+config.json
+config/
+
+# 生成的日报文件
+digest-*.md
+*.md.bak
+
+# 测试文件
+test-*.md
+*.test.md
+
+# IDE 和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 依赖
+node_modules/
+.pnp
+.pnp.js
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# 临时文件
+*.tmp
+*.temp
+.env
+.env.local
