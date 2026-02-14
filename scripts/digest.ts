@@ -97,7 +97,9 @@ async function main(): Promise<void> {
 
   if (!outputPath) {
     const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    outputPath = `./digest-${dateStr}.md`;
+    const dataDir = join(dirname(fileURLToPath(import.meta.url)), '..', 'data');
+    await mkdir(dataDir, { recursive: true });
+    outputPath = join(dataDir, `digest-${dateStr}.md`);
   }
 
   console.log(`[digest] === AI Daily Digest ===`);

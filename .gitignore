@@ -1,10 +1,8 @@
 # 敏感配置
 config.json
-config/
 
-# 生成的日报文件
-digest-*.md
-*.md.bak
+# 生成的日报文件（放在 data/ 目录）
+data/*.md
 
 # 测试文件
 test-*.md
