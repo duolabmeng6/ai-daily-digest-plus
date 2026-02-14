@@ -92,7 +92,7 @@ EOF
 
 ## 配置持久化
 
-配置文件路径: `~/.ai-daily-digest/config.json`
+配置文件路径: `${SKILL_DIR}/config.json`
 
 Agent 在执行前**必须检查**此文件是否存在：
 1. 如果存在，读取并解析 JSON
@@ -116,7 +116,7 @@ Agent 在执行前**必须检查**此文件是否存在：
 ### Step 0: 检查已保存配置
 
 ```bash
-cat ~/.ai-daily-digest/config.json 2>/dev/null || echo "NO_CONFIG"
+cat ${SKILL_DIR}/config.json 2>/dev/null || echo "NO_CONFIG"
 ```
 
 如果配置存在，询问是否复用：
